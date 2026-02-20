@@ -1,0 +1,48 @@
+﻿@* --- Privacy Policy Section --- 
+   This is a Partial View. It is called in Index.cshtml using <partial name="_PrivacyPolicy" />
+*@
+<section class="py-5 bg-white text-dark">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                @* Section Header: Centered with a custom red underline divider *@
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold display-6">Privacy <span class="text-danger">Policy</span></h2>
+                    <div class="bg-danger mx-auto mt-2" style="height: 3px; width: 60px;"></div>
+                </div>
+
+                @* Grid of Policy Points: Using 'g-4' for consistent spacing between columns *@
+                <div class="row g-4">
+                    @* 1. Data Collection *@
+                    <div class="col-md-6">
+                        <h5 class="fw-bold"><i class="bi bi-shield-check text-danger me-2"></i>Data Collection</h5>
+                        <p class="text-muted small">We collect information to provide better services to all our users. This includes your name, delivery address, and contact details provided during registration.</p>
+                    </div>
+
+                    @* 2. Security: Mentions SSL, which is crucial for user trust *@
+                    <div class="col-md-6">
+                        <h5 class="fw-bold"><i class="bi bi-lock text-danger me-2"></i>Security</h5>
+                        <p class="text-muted small">We use industry-standard encryption (SSL) to protect your data during transmission. Your payment information is handled by secure third-party processors.</p>
+                    </div>
+
+                    @* 3. Third Party Policy *@
+                    <div class="col-md-6">
+                        <h5 class="fw-bold"><i class="bi bi-eye-slash text-danger me-2"></i>Third Parties</h5>
+                        <p class="text-muted small">FoodieGo does not sell or rent your personal data to third parties. We only share data with restaurant partners and delivery riders to fulfill your orders.</p>
+                    </div>
+
+                    @* 4. Cookie Policy *@
+                    <div class="col-md-6">
+                        <h5 class="fw-bold"><i class="bi bi-cookie text-danger me-2"></i>Cookies</h5>
+                        <p class="text-muted small">We use cookies to improve your browsing experience and remember your preferences for future orders.</p>
+                    </div>
+                </div>
+
+                @* Bottom Disclaimer Box: Uses 'bg-light' and 'rounded-4' to stand out slightly *@
+                <div class="mt-5 p-4 border rounded-4 bg-light text-center">
+                    <p class="mb-0 text-muted">By using FoodieGo, you agree to our terms and conditions. Last updated: February 2026.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

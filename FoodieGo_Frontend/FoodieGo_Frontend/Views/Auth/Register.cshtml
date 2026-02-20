@@ -1,0 +1,53 @@
+﻿@* Ties this view to the Register model so we can capture Name, Email, and Password *@
+@model FoodieGo_Frontend.Models.Register
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="auth-container">
+    @* Registration Header *@
+    <div class="auth-header">
+        <h2>Join FoodieGo</h2>
+        <p class="text-muted">Create an account to start ordering</p>
+    </div>
+
+    @* The form targets the 'Register' action in the AuthController.
+       We use 'post' so the user's password isn't sent in the URL.
+    *@
+    <form asp-action="Register" method="post">
+        
+        @* Shows general errors from the server (e.g., "Registration failed") *@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mb-3">
+            @* 'asp-for' creates the 'id' and 'name' attributes automatically to match the C# model *@
+            <label asp-for="Name" class="form-label">Full Name</label>
+            <input asp-for="Name" class="form-control" placeholder="" />
+            
+            @* Displays field-specific validation errors if the Name is empty *@
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            @* 'type="password"' ensures the characters are hidden while typing *@
+            <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        @* Submitting this form triggers the [HttpPost] Register method in your Controller *@
+        <button type="submit" class="btn-logReg">Create Account</button>
+    </form>
+
+    @* Link to switch to the Login page if the user already has an account *@
+    <div class="auth-footer">
+        Already have an account? <a href="@Url.Action("Login", "Auth")" class="text-decoration-none">Login here</a>
+    </div>
+</div>

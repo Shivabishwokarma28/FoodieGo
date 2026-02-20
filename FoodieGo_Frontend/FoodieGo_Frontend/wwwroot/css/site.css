@@ -1,0 +1,161 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.search-container {
+    max-width: 600px;
+    width: 90%;
+}
+
+    .search-container input:focus {
+        box-shadow: none;
+        outline: none;
+    }
+
+/* Enhances the pill-shaped container */
+.bg-white.rounded-pill {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Categories Animation */
+.category-card {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        border-color: #ff4757;
+        background-color: #fff5f6 !important;
+    }
+/* This ensures the Unsplash images actually render in your cards */
+.food-card img {
+    height: 200px !important;
+    width: 100%;
+    object-fit: cover; /* Prevents stretching */
+    display: block;
+}
+
+.img-zoom-container {
+    height: 200px;
+    overflow: hidden;
+    background-color: #eee; /* Shows grey if image fails to load */
+}
+/* --- Hero Section & Layout Fixes --- */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fix for the White Category Box to float correctly over Hero */
+.container.bg-white {
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* --- Category Card Styling --- */
+.category-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color: #fff;
+    cursor: pointer;
+    border: 1px solid #eee !important;
+}
+
+    /* Hover Effect: Lift the card and change border color */
+    .category-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+        border-color: #ff4757 !important; /* FoodieGo Red */
+    }
+
+    /* Image Zoom Effect inside Category Card */
+    .category-card img {
+        transition: transform 0.5s ease;
+    }
+
+    .category-card:hover img {
+        transform: scale(1.1);
+    }
+
+/* --- Popular Dishes Card Styling --- */
+.food-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+    .food-card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    }
+
+.img-zoom-container {
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+}
+
+/* --- Utility Classes --- */
+.btn-foodie {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+    .btn-foodie:hover {
+        background-color: #e63946;
+        color: white;
+        transform: scale(1.05);
+    }
+
+/* Grid Gutter Fix (Prevents overlapping borders) */
+.row.g-4 {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1.5rem;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    section[style*="margin-top: -80px"] {
+        margin-top: -40px !important;
+    }
+
+    .container.bg-white {
+        padding: 20px !important;
+        width: 95%;
+    }
+}
+/* Fix Overlap: Ensure columns have space (gutters) */
+.row.g-4 {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1.5rem;
+}
+
+.category-card {
+    transition: transform 0.3s ease, border 0.3s ease;
+    border: 1px solid #f0f0f0 !important;
+}
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        border: 1px solid #ff4757 !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }

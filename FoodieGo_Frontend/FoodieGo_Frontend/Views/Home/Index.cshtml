@@ -1,0 +1,120 @@
+﻿@* Receives a list of food items; this changes when a user searches or filters *@
+@model IEnumerable<FoodieGo_Frontend.Models.FoodItem>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* --- Hero Section --- 
+   This is the first thing users see. It includes the search bar that sends a GET request
+   to the 'Search' action in the HomeController.
+*@
+<div class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hero-bg.jpg'); background-size: cover; padding: 100px 0;">
+    <div class="container text-center text-white">
+        <h1 class="display-3 fw-bold mb-3">Deliciousness Delivered <span class="text-danger">To Your Door</span></h1>
+        <p class="lead mb-4">Discover the best food and drinks in your area.</p>
+
+        @* Search Form: 'name="query"' matches the string parameter in HomeController.Search(string query) *@
+        <form asp-action="Search" asp-controller="Home" method="get" class="mx-auto shadow-lg bg-white rounded-pill p-2 d-flex mb-5" style="max-width: 600px;">
+            <input type="text"
+                   name="query"
+                   class="form-control border-0 rounded-pill px-4 text-dark"
+                   placeholder="Search for pizza, burgers..."
+                   required>
+            <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold">Search</button>
+        </form>
+    </div>
+</div>
+
+@* --- Categories Section --- 
+   This uses an anonymous object array to create quick-access category buttons.
+   Each one links to 'CategoryDetails' to filter the main list.
+*@
+<section class="py-5" style="margin-top: -80px; position: relative; z-index: 10;">
+    <div class="container bg-white shadow-lg p-5" style="border-radius: 30px;">
+        <h2 class="text-center fw-bold mb-4">Explore <span class="text-danger">Categories</span></h2>
+        <div class="row g-4">
+            @{
+                var categories = new[] {
+                        new { Name = "Pizza", Img = "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400" },
+                        new { Name = "Burgers", Img = "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400" },
+                        new { Name = "Coffee", Img = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400" },
+                        new { Name = "Desserts", Img = "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400" },
+                        new { Name = "Sushi", Img = "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=400" },
+                        new { Name = "Pasta", Img = "https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=400" },
+                        new { Name = "Salads", Img = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400" },
+                        new { Name = "Tacos", Img = "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400" }
+                        };
+            }
+            @foreach (var cat in categories)
+            {
+                <div class="col-6 col-md-3">
+                    <a asp-action="CategoryDetails" asp-controller="Home" asp-route-name="@cat.Name" class="text-decoration-none">
+                        <div class="card border rounded-4 shadow-sm h-100 category-card overflow-hidden">
+                            <img src="@cat.Img" class="card-img-top" style="height: 120px; object-fit: cover;">
+                            <div class="card-body text-center p-2">
+                                <h6 class="fw-bold text-dark m-0">@cat.Name</h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@* --- Popular Dishes Loop --- 
+   This displays the actual food items. It handles both the full list and search results.
+*@
+<section id="popular-dishes" class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold m-0">
+                @* Uses ViewBag to dynamically change the title if a search was performed *@
+                @(ViewBag.SelectedCategory ?? "Popular") <span class="text-danger">Dishes</span>
+            </h2>
+            @if (ViewBag.SelectedCategory != null)
+            {
+                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-danger btn-sm rounded-pill">View All Dishes ×</a>
+            }
+        </div>
+
+        <div class="row g-4">
+            @* Null check + Any() ensures the page doesn't crash if the database/list is empty *@
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden food-card">
+                            <a asp-action="Details" asp-controller="Home" asp-route-id="@item.Id" class="text-decoration-none text-dark">
+                                <div style="height: 200px;">
+                                    <img src="@item.ImageUrl" class="w-100 h-100" style="object-fit: cover;" alt="@item.Name">
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="fw-bold m-0 text-truncate" style="max-width: 150px;">@item.Name</h6>
+                                        <span class="text-danger fw-bold">Rs. @item.Price.ToString("N0")</span>
+                                    </div>
+                                    <button class="btn btn-outline-danger w-100 btn-sm rounded-pill mt-3">Add to Cart</button>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                @* This 'Empty State' shows if a user searches for something that doesn't exist *@
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted">No dishes found in this category.</p>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-danger rounded-pill">Back to Full Menu</a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@* Partial views keep the Index clean by moving static content into separate files *@
+<partial name="_AboutSection" />
+<partial name="_PrivacyPolicy"></partial>

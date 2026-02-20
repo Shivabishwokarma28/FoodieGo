@@ -1,0 +1,84 @@
+﻿@* Sets the browser tab name to 'About Us' *@
+@{
+    ViewData["Title"] = "About Us";
+}
+
+@* --- About Hero Section --- 
+   The 'bg-danger' class gives it that signature FoodieGo red branding.
+*@
+<div class="py-5 bg-danger text-white mb-5">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold">Our Story</h1>
+        <p class="lead">Bringing the flavors of the world to your doorstep since 2026.</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row align-items-center g-5">
+        @* Image Section: Uses 'shadow-lg' and 'rounded-5' for a modern, soft aesthetic *@
+        <div class="col-md-6">
+            <div class="rounded-5 overflow-hidden shadow-lg">
+                <img src="https://www.shutterstock.com/image-photo/colorful-assortment-fresh-vegetables-fruits-600nw-2693076619.jpg" class="img-fluid" alt="Fresh food assortment">
+            </div>
+        </div>
+
+        @* Text Section: The 'text-shadow' style ensures the white text remains readable against light backgrounds *@
+        <div class="col-md-6">
+            <h2 class="fw-bold mb-4 text-white">Passion for <span class="text-danger">Great Food</span></h2>
+            <p class="lead mb-4 text-white" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
+                FoodieGo started with a simple idea: everyone deserves high-quality, delicious food
+                without the hassle. We partner with the best local chefs and restaurants to
+                ensure that every bite you take is prepared with fresh ingredients and authentic passion.
+            </p>
+
+            @* Stats Grid: Showcases the scale of the business using smaller nested columns *@
+            <div class="row g-3 text-white">
+                <div class="col-6">
+                    <div class="p-3 border rounded-4 text-center">
+                        <h3 class="fw-bold text-danger">50+</h3>
+                        <small class="text-white m-0 small fw-bold">Local Partners</small>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border rounded-4 text-center">
+                        <h3 class="fw-bold text-danger">15k+</h3>
+                        <small class="text-white m-0 small fw-bold">Happy Customers</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* --- Why Choose Us Section --- 
+       Uses cards with Bootstrap Icons (bi-*) to highlight key features.
+    *@
+    <div class="mt-5 pt-5 text-center">
+        <h2 class="fw-bold mb-5 text-white">Why People <span class="text-danger">Choose Us</span></h2>
+        <div class="row g-4">
+            @* Fast Delivery Card *@
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-4 h-100 rounded-4">
+                    <div class="mb-3 text-danger"><i class="bi bi-lightning-fill fs-1"></i></div>
+                    <h5 class="fw-bold">Fast Delivery</h5>
+                    <p class="text-muted">We value your time. Our delivery partners ensure your food arrives hot and fresh.</p>
+                </div>
+            </div>
+            @* Quality Card *@
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-4 h-100 rounded-4">
+                    <div class="mb-3 text-danger"><i class="bi bi-heart-fill fs-1"></i></div>
+                    <h5 class="fw-bold">Fresh Quality</h5>
+                    <p class="text-muted">We only partner with restaurants that meet our strict quality and hygiene standards.</p>
+                </div>
+            </div>
+            @* Support Card *@
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-4 h-100 rounded-4">
+                    <div class="mb-3 text-danger"><i class="bi bi-headset fs-1"></i></div>
+                    <h5 class="fw-bold">24/7 Support</h5>
+                    <p class="text-muted">Have a question? Our support team is always here to help you with your orders.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿@* Expects a list (IEnumerable) of FoodItems from the CategoryDetails action in the Controller *@
+@model IEnumerable<FoodieGo_Frontend.Models.FoodItem>
+
+<div class="container py-5">
+    @* Uses ViewBag.CategoryName (set in the Controller) to show a dynamic title like "All Pizza Dishes" *@
+    <h1 class="fw-bold mb-4">All <span class="text-danger">@ViewBag.CategoryName</span> Dishes</h1>
+    <hr />
+
+    @* Bootstrap grid: 'g-4' adds spacing (gutters) between the food cards *@
+    <div class="row g-4 mt-2">
+        @* Loops through every food item passed in the Model list *@
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                @* Card container with shadow and rounded corners for a modern UI look *@
+                <div class="card shadow-sm border-0 rounded-4">
+                    @* Displays the food image; 'object-fit: cover' ensures images don't look stretched *@
+                    <img src="@item.ImageUrl" class="card-img-top rounded-top-4" style="height: 250px; object-fit: cover;">
+
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold">@item.Name</h5>
+
+                        @* Formats the price with 'N0' to add comma separators (e.g., 1,250) *@
+                        <p class="text-danger fw-bold">Rs. @item.Price.ToString("N0")</p>
+
+                        @* Link to the single item details page. 
+                           'asp-route-id' passes the specific item ID to the 'Details' action *@
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-danger rounded-pill px-4">View Item</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

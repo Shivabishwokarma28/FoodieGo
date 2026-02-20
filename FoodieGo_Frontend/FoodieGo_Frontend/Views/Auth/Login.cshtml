@@ -1,0 +1,47 @@
+﻿@* Declares the model type so Razor knows to expect an Email and Password *@
+@model FoodieGo_Frontend.Models.Login
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="auth-container">
+    @* Visual header for the login card *@
+    <div class="auth-header">
+        <h2>Welcome Back</h2>
+        <p class="text-muted">Login to your FoodieGo account</p>
+    </div>
+
+    @* The form uses 'asp-action="LogIn"' to point to the [HttpPost] LogIn method in AuthController.
+       'method="post"' ensures credentials aren't visible in the URL bar.
+    *@
+    <form asp-action="LogIn" method="post">
+
+        @* Displays general errors, like "Invalid Credentials", that aren't tied to a specific field *@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mb-3">
+            @* asp-for links the label and input directly to the 'Email' property in your Login model *@
+            <label asp-for="Email" class="form-label">Email Address</label>
+            <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+
+            @* Displays validation errors (like "Required" or "Invalid Email Format") *@
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            @* type="password" masks the characters as the user types *@
+            <input asp-for="Password" class="form-control" type="password" placeholder="Enter password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        @* The submit button triggers the AuthController LogIn task *@
+        <button type="submit" class="btn-logReg">Login</button>
+    </form>
+
+    @* Navigation link to the Register page if the user doesn't have an account *@
+    <div class="auth-footer">
+        New to FoodieGo? <a href="@Url.Action("Register", "Auth")" class="text-decoration-none">Create an account</a>
+    </div>
+</div>

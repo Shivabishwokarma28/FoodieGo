@@ -1,0 +1,64 @@
+﻿@* Receives a single FoodItem object from the 'Details(int id)' action in the Controller *@
+@model FoodieGo_Frontend.Models.FoodItem
+
+@{
+    @* Dynamically sets the Browser Tab name to the name of the dish (e.g., "Salmon Nigiri") *@
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container py-5">
+    @* Breadcrumb Navigation: Helps users see exactly where they are (Home > Item Name) *@
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" class="text-danger text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active">@Model.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-5">
+        @* Left Column: Dish Image *@
+        <div class="col-md-6">
+            @* 'overflow-hidden' ensures the image corners stay rounded inside the shadow container *@
+            <div class="rounded-5 overflow-hidden shadow-lg">
+                <img src="@Model.ImageUrl" class="img-fluid w-100" style="min-height: 400px; object-fit: cover;" alt="@Model.Name">
+            </div>
+        </div>
+
+        @* Right Column: Dish Information & Selection *@
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+            @* Visual badge to make the item look more appealing *@
+            <span class="badge bg-danger rounded-pill px-3 py-2 mb-3" style="width: fit-content;">Popular Pick</span>
+
+            <h1 class="display-4 fw-bold mb-2">@Model.Name</h1>
+
+            @* Price formatted with commas for readability *@
+            <h2 class="text-danger fw-bold mb-4">Rs. @Model.Price.ToString("N0")</h2>
+
+            <p class="lead text-muted mb-5">
+                @Model.Description
+            </p>
+
+            @* Quantity Selector and Add to Cart Button *@
+            <div class="d-flex gap-3">
+                @* A simple UI for quantity selection (functionality usually requires JavaScript) *@
+                <div class="input-group" style="width: 130px;">
+                    <button class="btn btn-outline-secondary rounded-start-pill" type="button">-</button>
+                    <input type="text" class="form-control text-center border-secondary" value="1">
+                    <button class="btn btn-outline-secondary rounded-end-pill" type="button">+</button>
+                </div>
+
+                @* The main call-to-action button *@
+                <button class="btn btn-danger btn-lg rounded-pill px-5 flex-grow-1 shadow">Add to Cart</button>
+            </div>
+
+            @* Delivery Information Box *@
+            <div class="mt-5 p-3 bg-light rounded-4 border">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-truck text-danger me-2"></i>
+                    <span class="fw-bold">Free Delivery</span>
+                </div>
+                <small class="text-muted">Orders over Rs. 2,000 qualify for free delivery in your area.</small>
+            </div>
+        </div>
+    </div>
+</div>
